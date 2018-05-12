@@ -1,45 +1,84 @@
-//  Copyright (c) 2018 Antoine Tran Tan
-//
+/*
+  Simple RTC for Arduino Zero and MKR1000
+
+  Demonstrates the use of the RTC library for the Arduino Zero and MKR1000
+
+  This example code is in the public domain
+
+  http://arduino.cc/en/Tutorial/SimpleRTC
+
+  created by Arturo Guadalupi <a.guadalupi@arduino.cc>
+  15 Jun 2015
+  modified 
+  18 Feb 2016
+  modified by Andrea Richetta <a.richetta@arduino.cc>
+  24 Aug 2016
+*/
 
 #include <Arduino.h>
-#include "include/TM1637.h"
+#include "include/RTCZero.h"
 
-#define CLK 2 //pins definitions for TM1637 and can be changed to other ports
-#define DIO 3
+/* Create an rtc object */
+RTCZero rtc;
 
-// Declaration of a int8_t array with 4 elements
-int8_t TimeDisp[] = {0, 0, 0, 0};
+/* Change these values to set the current initial time */
+const byte seconds = 0;
+const byte minutes = 0;
+const byte hours = 16;
 
-// Declaration of a TM1637 variable
-TM1637 tm1637(CLK, DIO);
+/* Change these values to set the current initial date */
+const byte day = 15;
+const byte month = 6;
+const byte year = 15;
 
 void setup()
 {
-    tm1637.set();
-    tm1637.init();
+  Serial.begin(9600);
+
+  rtc.begin(); // initialize RTC
+
+  // Set the time
+  rtc.setHours(hours);
+  rtc.setMinutes(minutes);
+  rtc.setSeconds(seconds);
+
+  // Set the date
+  rtc.setDay(day);
+  rtc.setMonth(month);
+  rtc.setYear(year);
+
+  // you can use also
+  //rtc.setTime(hours, minutes, seconds);
+  //rtc.setDate(day, month, year);
 }
 
 void loop()
 {
-    static int display_point = 0;
+  // Print date...
+  print2digits(rtc.getDay());
+  Serial.print("/");
+  print2digits(rtc.getMonth());
+  Serial.print("/");
+  print2digits(rtc.getYear());
+  Serial.print(" ");
 
-    delay(500);
+  // ...and time
+  print2digits(rtc.getHours());
+  Serial.print(":");
+  print2digits(rtc.getMinutes());
+  Serial.print(":");
+  print2digits(rtc.getSeconds());
 
-    TimeDisp[3] = 8;
-    TimeDisp[2] = 1;
-    TimeDisp[1] = 0;
-    TimeDisp[0] = 2;
+  Serial.println();
 
-    if (display_point == 0)
-    {
-        tm1637.point(POINT_ON);
-        display_point = 1;
-    }
-    else
-    {
-        tm1637.point(POINT_OFF);
-        display_point = 0;
-    }
+  delay(1000);
+}
 
-    tm1637.display(TimeDisp);
+
+
+void print2digits(int number) {
+  if (number < 10) {
+    Serial.print("0"); // print a 0 before if the number is < than 10
+  }
+  Serial.print(number);
 }
