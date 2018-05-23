@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "include/timer.h"
-
+#define CLK 2 //pins definitions for TM1637 and can be changed to other ports
+#define DIO 3
 /// The class fsm_state is a type whose value is restricted to a 
 /// subset of values
 enum class fsm_state 
@@ -49,6 +50,8 @@ void setup()
     // Make the function automate() being called 
     // every 1000 microseconds
     set_timer4_interrupt(1000,automate);
+    tm1637.set();
+    tm1637.init();
 }
 
 void loop()
@@ -68,4 +71,36 @@ void loop()
 
             break;
     }
+}
+
+// Declaration of a int8_t array with 4 elements
+int8_t TimeDisp[] = {0, 0, 0, 0};
+
+// Declaration of a TM1637 variable
+TM1637 tm1637(CLK, DIO);
+
+
+void loop()
+{
+    static int display_point = 0;
+
+    delay(500);
+
+    TimeDisp[3] = 8;
+    TimeDisp[2] = 1;
+    TimeDisp[1] = 0;
+    TimeDisp[0] = 2;
+
+    if (display_point == 0)
+    {
+        tm1637.point(POINT_ON);
+        display_point = 1;
+    }
+    else
+    {
+        tm1637.point(POINT_OFF);
+        display_point = 0;
+    }
+
+    tm1637.display(TimeDisp);
 }
