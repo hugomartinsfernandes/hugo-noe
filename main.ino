@@ -6,8 +6,8 @@
 /// subset of values
 enum class fsm_state 
 {
-    s0, s1
-};
+    s0, s1, s2, s3, s4, s5, S6
+}
 
 // Declaration of a variable of type fsm_state
 fsm_state my_state = fsm_state::s0;
@@ -24,17 +24,47 @@ void automate()
         // Manage the state transitions from the state value
         switch (my_state)
         {
-            case fsm_state::s0:
+           
+            case fsm_state::s0: //si mode normal
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) // si on appuie une fois sur un bouton
+                my_state = fsm_state::s1: // --> mode réglage enclenché
+            
+        break;
 
-                my_state = fsm_state::s1;
+            case fsm_state::s1: // si mode réglage heure
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) // si on appuie une fois sur le bouton +
+                my_state = fsm_state::s201: // incrémenter l'heure + l'afficher
 
-                break;
+        break;
 
-            case fsm_state::s1:
+            case fsm_state::s1: // si mode réglage heure
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) //si on appuie une fois sur le bouton -
+                my_state = fsm_state::s202 // décrémenter l'heure + afficher
 
-                my_state = fsm_state::s0;
+        break;
 
-                break;
+            case fsm_state::s1: // si mode réglage heure
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) // si on appuie une 2eme fois sur le bouton réglage
+                my_state = fsm_state::s3: // passage au mode réglage des minutes
+
+        break;
+
+            case fsm_state::s3: // si mode réglage minute
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) // si on appuie une fois sur le bouton +
+                my_state = fsm_state::s401: // incrémenter les minutes + l'afficher
+
+        break;
+
+            case fsm_state::s3: // si mode réglage minute
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) // si on appuie une fois sur le bouton -
+                my_state = fsm_state::s402: //décrémenter les minutes + l'afficher
+
+        break;
+
+            case fsm_state::s3: // si mode reglage minute
+            if digitalRead(pin, LOW) && digitalRead(pin, HIGH) // si on appuie une fois sur le bouton reglage
+                my_state = fsm_state::s5: //sauvegarde de l'heure, redémarrage de l'horloge a partir de cette heure
+                //sauvegarde
         }
     }
     else
