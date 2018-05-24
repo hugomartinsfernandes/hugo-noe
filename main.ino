@@ -37,8 +37,7 @@ void automate()
     switch (my_state)
     {
         case fsm_state::s0 : //si mode normal
-            rtc.begin();
-            tm1637.display(TimeDisp);
+           
             if ( digitalRead( BP_Jaune ) == LOW )// si on appuie une fois sur un bouton
             {
                 my_state = fsm_state::s1_low;
@@ -47,7 +46,7 @@ void automate()
             break;
 
         case fsm_state::s1_low : //si mode normal
-            tm1637.display(TimeDisp);
+            
             if (digitalRead( BP_Jaune ) == HIGH) // si on appuie une fois sur un bouton
             {
                 my_state = fsm_state::s1_high;
@@ -97,7 +96,7 @@ void automate()
         case fsm_state::s201_high:
 
             heure = heure - 1;
-
+            tm1637.display(TimeDisp);
             my_state = fsm_state::s1_high;
 
             break;
@@ -105,7 +104,7 @@ void automate()
         case fsm_state::s202_high:
 
             heure = heure + 1;
-
+            tm1637.display(TimeDisp);
             my_state = fsm_state::s1_high;
 
             break;
@@ -157,16 +156,16 @@ void automate()
 
         case fsm_state::s401_high:
 
-             minute --;
-
+            minute --;
+            tm1637.display(TimeDisp);
             my_state = fsm_state::s3_high;
 
             break;
 
         case fsm_state::s402_high:
 
-             minute ++;
-
+            minute ++;
+            tm1637.display(TimeDisp);
             my_state = fsm_state::s3_high;
 
             break;
