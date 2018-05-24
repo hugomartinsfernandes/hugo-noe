@@ -62,7 +62,12 @@ void automate()
             else if (digitalRead (BP_Rouge) == LOW)
             {
                 my_state = fsm_state::s202_low;
-            }               
+            }
+
+            else if (digitalRead (BP_Jaune) == LOW)
+            {
+                my_state = fsm_state::s3_low;
+            }              
             
             break;
 
@@ -88,9 +93,83 @@ void automate()
             //sethour --
 
             my_state = fsm_state::s1_high;
+
+            break;
+
+        case fsm_state::s202_high:
+
+            //sethour ++
+
+            my_state = fsm_state::s1_high;
+
+            break;
+
+        case fsm_state::s3_low:
+
+            if (digitalRead(BP_Jaune) == HIGH) // si on appuie une fois sur un bouton
+            {
+                my_state = fsm_state::s3_high;
+            }
+
+            break;
+
+        case fsm_state::s3_high:
+
+            if (digitalRead(BP_Bleu) == LOW)
+            {
+                my_state = fsm_state::s401_low;
+            }
+
+            else if (digitalRead(BP_Rouge) == LOW)
+            {
+                my_state = fsm_state::s402_low;
+            }
+
+            else if (digitalRead(BP_Jaune) == LOW)
+            {
+                my_state = fsm_state::s5;
+            }
+
+            break;
+
+        case fsm_state::s401_low:
+
+            if (digitalRead(BP_Bleu) == HIGH)
+            {
+                my_state = fsm_state::s401_high;
+            }
+
+            break;
+
+        case fsm_state::s402_low:
+
+            if (digitalRead(BP_Rouge) == HIGH)
+            {
+                my_state = fsm_state::s402_high;
+            }
+            break;
+
+        case fsm_state::s401_high:
+
+            //sethour --
+
+            my_state = fsm_state::s3_high;
+
+            break;
+
+        case fsm_state::s402_high:
+
+            //sethour ++
+
+            my_state = fsm_state::s3_high;
+
+            break;
         
+        case fsm_state::s5:
 
+            my_state = fsm_state::s1;
 
+            break;
     }
 }
 
