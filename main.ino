@@ -26,6 +26,9 @@ int8_t TimeDisp[] = {0, 0, 0, 0};
 // Declaration of a TM1637 variable
 TM1637 tm1637 = {CLK, DIO};
 
+/* Create an rtc object */
+RTCZero rtc;
+
 void automate()
 {
     // Manage the state transitions from the state value
@@ -95,6 +98,8 @@ void setup()
 {
     tm1637.set();
     tm1637.init();
+
+    rtc.begin(); // initialize RTC
 
     // Make the function automate() being called 
     // every 1000 microseconds
