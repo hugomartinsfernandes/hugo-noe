@@ -14,7 +14,7 @@
 /// subset of values
 enum class fsm_state 
 {
-    s0, s1_low, s1_high, s2, s3, s4, s5, s6, s201_low, s201_high, s202_low, s202_high
+    s0, s1_low, s1_high, s2, s3_high, s3_low, s4, s5, s6, s201_low, s201_high, s202_low, s202_high, s401_low, s401_high, s402_low, s402_high
 };
 
 // Declaration of a variable of type fsm_state
@@ -27,7 +27,7 @@ int8_t TimeDisp[] = {0, 0, 0, 0};
 TM1637 tm1637 = {CLK, DIO};
 
 /* Create an rtc object */
-RTCZero rtc;
+/* RTCZero rtc; */
 
 void automate()
 {
@@ -35,6 +35,7 @@ void automate()
     switch (my_state)
     {
         case fsm_state::s0 : //si mode normal
+            rtc.begin();
 
             if ( digitalRead( BP_Jaune ) == LOW )// si on appuie une fois sur un bouton
             {
@@ -53,6 +54,9 @@ void automate()
             break;
 
         case fsm_state::s1_high :
+            rtc.setHours(0);
+            rtc.setMinutes(0);
+            rtc.setSeconds(0);
 
             if (digitalRead ( BP_Bleu ) == LOW)
             {
@@ -64,10 +68,10 @@ void automate()
                 my_state = fsm_state::s202_low;
             }
 
-            else if (digitalRead (BP_Jaune) == LOW)
+             else if (digitalRead (BP_Jaune) == LOW)
             {
                 my_state = fsm_state::s3_low;
-            }              
+            }               
             
             break;
 
@@ -90,7 +94,7 @@ void automate()
 
         case fsm_state::s201_high:
 
-            //sethour --
+            int heure=-1;
 
             my_state = fsm_state::s1_high;
 
@@ -98,7 +102,7 @@ void automate()
 
         case fsm_state::s202_high:
 
-            //sethour ++
+            int heure=+1;
 
             my_state = fsm_state::s1_high;
 
@@ -151,7 +155,7 @@ void automate()
 
         case fsm_state::s401_high:
 
-            //sethour --
+            int minute=-1;
 
             my_state = fsm_state::s3_high;
 
@@ -159,7 +163,7 @@ void automate()
 
         case fsm_state::s402_high:
 
-            //sethour ++
+            int minute=+1;
 
             my_state = fsm_state::s3_high;
 
@@ -167,18 +171,22 @@ void automate()
         
         case fsm_state::s5:
 
-            my_state = fsm_state::s1;
+            my_state = fsm_state::s0;
 
-            break;
+            break; 
     }
 }
 
 void setup()
 {
+    pinMode(8,INPUT_PULLUP);
+    pinMode(9,INPUT_PULLUP);
+    pinMode(10,INPUT_PULLUP);
+
     tm1637.set();
     tm1637.init();
 
-    rtc.begin(); // initialize RTC
+/*     rtc.begin(); // initialize RTC */
 
     // Make the function automate() being called 
     // every 1000 microseconds
@@ -195,22 +203,29 @@ void loop()
     static int heure = 0;
     static int minute = 0;
     delay(500);
-
-    TimeDisp[3] = minute % 10;
-    TimeDisp[2] = minute / 10;
-    TimeDisp[1] = heure % 10;
-    TimeDisp[0] = heure / 10;
-
-    if (display_point == 0)
+    switch (my_state)
     {
-        tm1637.point(POINT_ON);
-        display_point = 1;
-    }
-    else
-    {
-        tm1637.point(POINT_OFF);
-        display_point = 0;
+    case fsm_state::s0:
+        heure = rtc.getHours();
+        minute = rtc.getMinutes();
     }
 
-    tm1637.display(TimeDisp);
+
+        TimeDisp[3] = minute % 10;
+        TimeDisp[2] = minute / 10;
+        TimeDisp[1] = heure % 10;
+        TimeDisp[0] = heure / 10;
+
+        if (display_point == 0)
+        {
+            tm1637.point(POINT_ON);
+            display_point = 1;
+        }
+        else
+        {
+            tm1637.point(POINT_OFF);
+            display_point = 0;
+        }
+
+        tm1637.display(TimeDisp);
 }
