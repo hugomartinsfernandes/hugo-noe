@@ -174,6 +174,20 @@ void automate()
             my_state = fsm_state::s0;
 
             break; 
+        
+
+        case fsm_state::s10: //s10 est l'état que tu veux pour allumer ton feu d'une 
+                            // certaine couleur, disons bleu
+            bar.setBits(0000000000); // crois pas que je vais mamuser a tout tapper
+            bar2.setBits(00000000);
+        
+            break;
+
+        case fsm_state::s11: //2eme état
+            bar.setBits(0000);
+            baré.setBits(0000);
+
+            break;
     }
 }
 

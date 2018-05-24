@@ -1,127 +1,3 @@
----
-layout: default
----
-
-Text can be **bold**, _italic_, or ~~strikethrough~~.
-
-[Link to another page](./another-page.html).
-
-There should be whitespace between paragraphs.
-
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
-
-# Header 1
-
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://assets-cdn.github.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
-
 # Projet de Science de L'ingénieur 1ère D
 
 ## Projet : L'horloge numérique réglable par 3 boutons poussoirs
@@ -155,12 +31,14 @@ Arduino
 
 ## Déroulement du projet
 
-Ce type de projet devant normalement se faire à 4, étant 2 nous avons donc travailler ensemble sur chaque partie de ce projet (théorique, analyse de code, pratique, communiquer ...) au lycée comme chez nous.
+Ce type de projet devant normalement se faire à 4, étant 2 nous avons donc travailler ensemble sur chaque partie de ce projet (théorique, analyse de code, pratique, communiquer ...) au lycée comme chez nous. Nous avons tout d'abord tester les codes contenus dans les différents exemples, puis nous avons rechercher comment les accorders pour obtenir le résultat recherché, puis nous nous sommes occuper de la partie communiquer en écrivant ce texte et en créant un powerpoint afin de présenter le projet.
 
 ## Partie pratique et démonstration
 
 --------------------------------------------------------------
                 mettre image diagramme états/transitions
+(https://github.com/lycee-chaptal-sii/hugo-noe/blob/partie_pratique/docs/diagramme%20etats%20transitions.png)
+
 -----------------------------------------------------------------
 --------------------------------------------------------------
 _______________________________________________________________
@@ -176,3 +54,7 @@ _______________________________________________________________
     - si l'on appuie sur le bouton de décrémentation, les minutes vont se décrémenter.
     - si l'on appuie encore une fois sur le bouton de réglage, nous passons au quatrième états, où les données de l'heure et des minutes sont enregistrées et afficher sur le cadran, et ainsi nous repassons directement à l'état initial.
 
+
+
+## Conclusion :
+Les ordinateurs utilisés étant en disfonctionnement pour certain, et certain de nos fichiers que nous avons du réécrire car ils avaient disparues nous ont considérablement ralentie dans notre projet, nous n'avons donc pas pu mener a bien notre projet, il ne fonctionne donc pas completement. Mais grâce à nos recherches, nous pouvons vous donner les explications néscessaires à la compréhension du fonctionnement de notre projet.
