@@ -10,6 +10,8 @@
 #define BP_Rouge 8
 #define BP_Bleu 10
 
+static int heure = 0;
+static int minute = 0;
 /// The class fsm_state is a type whose value is restricted to a 
 /// subset of values
 enum class fsm_state 
@@ -36,7 +38,7 @@ void automate()
     {
         case fsm_state::s0 : //si mode normal
             rtc.begin();
-
+            tm1637.display(TimeDisp);
             if ( digitalRead( BP_Jaune ) == LOW )// si on appuie une fois sur un bouton
             {
                 my_state = fsm_state::s1_low;
@@ -45,7 +47,7 @@ void automate()
             break;
 
         case fsm_state::s1_low : //si mode normal
-
+            tm1637.display(TimeDisp);
             if (digitalRead( BP_Jaune ) == HIGH) // si on appuie une fois sur un bouton
             {
                 my_state = fsm_state::s1_high;
@@ -57,7 +59,7 @@ void automate()
             rtc.setHours(0);
             rtc.setMinutes(0);
             rtc.setSeconds(0);
-
+            tm1637.display(TimeDisp);
             if (digitalRead ( BP_Bleu ) == LOW)
             {
                 my_state = fsm_state::s201_low;
@@ -94,7 +96,7 @@ void automate()
 
         case fsm_state::s201_high:
 
-            int heure=-1;
+            heure = heure - 1;
 
             my_state = fsm_state::s1_high;
 
@@ -102,7 +104,7 @@ void automate()
 
         case fsm_state::s202_high:
 
-            int heure=+1;
+            heure = heure + 1;
 
             my_state = fsm_state::s1_high;
 
@@ -155,7 +157,7 @@ void automate()
 
         case fsm_state::s401_high:
 
-            int minute=-1;
+             minute --;
 
             my_state = fsm_state::s3_high;
 
@@ -163,13 +165,17 @@ void automate()
 
         case fsm_state::s402_high:
 
-            int minute=+1;
+             minute ++;
 
             my_state = fsm_state::s3_high;
 
             break;
         
         case fsm_state::s5:
+
+            rtc.setHours(heure);
+            rtc.setMinutes(minute);
+            rtc.setSeconds(0);
 
             my_state = fsm_state::s0;
 
@@ -200,8 +206,7 @@ void setup()
 void loop()
 {
     static int display_point = 0;
-    static int heure = 0;
-    static int minute = 0;
+    
     delay(500);
     switch (my_state)
     {
