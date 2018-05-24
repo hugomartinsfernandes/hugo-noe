@@ -37,16 +37,16 @@ void automate()
         case fsm_state::s0 : //si mode normal
             rtc.begin();
 
-            if ( digitalRead( BP_Jaune ) == LOW )// si on appuie une fois sur un bouton
+            if ( digitalRead( BP_Jaune ) == LOW )
             {
                 my_state = fsm_state::s1_low;
             }
 
             break;
 
-        case fsm_state::s1_low : //si mode normal
+        case fsm_state::s1_low : 
 
-            if (digitalRead( BP_Jaune ) == HIGH) // si on appuie une fois sur un bouton
+            if (digitalRead( BP_Jaune ) == HIGH) 
             {
                 my_state = fsm_state::s1_high;
             }
@@ -94,7 +94,7 @@ void automate()
 
         case fsm_state::s201_high:
 
-            int heure=-1;
+            int heure= heure -1;
 
             my_state = fsm_state::s1_high;
 
@@ -102,7 +102,7 @@ void automate()
 
         case fsm_state::s202_high:
 
-            int heure=+1;
+            int heure= heure +1;
 
             my_state = fsm_state::s1_high;
 
@@ -110,7 +110,7 @@ void automate()
 
         case fsm_state::s3_low:
 
-            if (digitalRead(BP_Jaune) == HIGH) // si on appuie une fois sur un bouton
+            if (digitalRead(BP_Jaune) == HIGH) 
             {
                 my_state = fsm_state::s3_high;
             }
@@ -155,7 +155,7 @@ void automate()
 
         case fsm_state::s401_high:
 
-            int minute=-1;
+            int minute= minute -1;
 
             my_state = fsm_state::s3_high;
 
@@ -163,7 +163,7 @@ void automate()
 
         case fsm_state::s402_high:
 
-            int minute=+1;
+            int minute= minute +1;
 
             my_state = fsm_state::s3_high;
 

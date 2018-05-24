@@ -1,8 +1,8 @@
 state s0 = horloge fonctionne normalement
 state s1 = réglage heure
-state s201 = sethour++ et gethour afficher
-state s202 = sethour-- et gethour afficher
+state s201 = sethour-- et gethour afficher
+state s202 = sethour++ et gethour afficher
 state s3 = réglage minute
-state s401 = setminute++ et getminute afficher
-state s402  = setminute-- et getminute afficher
+state s401 = setminute-- et getminute afficher
+state s402 = setminute++ et getminute afficher
 state s5 = retour a l'horloge a partir de cette heure
