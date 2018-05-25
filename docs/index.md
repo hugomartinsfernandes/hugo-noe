@@ -35,13 +35,8 @@ Ce type de projet devant normalement se faire à 4, étant 2 nous avons donc tra
 
 ## Partie pratique et démonstration
 
---------------------------------------------------------------
-                mettre image diagramme états/transitions
-(https://github.com/lycee-chaptal-sii/hugo-noe/blob/partie_pratique/docs/diagramme%20etats%20transitions.png)
 
------------------------------------------------------------------
---------------------------------------------------------------
-_______________________________________________________________
+![image](diagrammeetatstransitions.png)
 
 
 * A l'état initial, l'horloge affiche l'heure normalement.
